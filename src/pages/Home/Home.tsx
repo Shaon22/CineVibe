@@ -1,6 +1,7 @@
-import Banner from "../../components/Banner";
+import Banner from "./Banner";
 import Nav from "../../components/Nav";
 import Sidenav from "../../components/Sidenav";
+import Trending from "./Trending";
 
 const Home = () => {
   return <div className=" min-h-screen home ">
@@ -13,6 +14,7 @@ const Home = () => {
               <div className="w-[80%] ml-[300px]">
                 <Nav></Nav> 
                 <Banner></Banner>
+                <Trending></Trending>
               </div>
             
             </div>
