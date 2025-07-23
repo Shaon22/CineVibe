@@ -15,7 +15,7 @@ const Nav = () => {
   });
 
   return (
-    <div className="relative flex justify-between items-center">
+    <div className="relative flex justify-between items-center mt-5">
       <div className=" w-[50%]">
         <input
           placeholder={text}

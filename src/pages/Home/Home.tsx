@@ -1,7 +1,10 @@
 import Banner from "./Banner";
 import Nav from "../../components/Nav";
 import Sidenav from "../../components/Sidenav";
-import Trending from "./Trending";
+import TrendingMovies from "./TrendingMovies";
+import TrendingSeries from "./TrendingSeries";
+import Blogs from "./Blogs";
+import Footer from "../../components/Footer";
 
 const Home = () => {
   return <div className=" min-h-screen home ">
@@ -14,7 +17,10 @@ const Home = () => {
               <div className="w-[80%] ml-[300px]">
                 <Nav></Nav> 
                 <Banner></Banner>
-                <Trending></Trending>
+                <TrendingMovies></TrendingMovies>
+                <TrendingSeries></TrendingSeries>
+                <Blogs></Blogs>
+                <Footer></Footer>
               </div>
             
             </div>

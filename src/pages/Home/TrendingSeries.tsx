@@ -3,9 +3,9 @@
 import type React from "react"
 
 import { useState, useRef, useCallback } from "react"
-import { Play } from "lucide-react"
+import {Tv } from "lucide-react"
 
-const Trending=()=> {
+const TrendingSeries=()=> {
             const videos = [
     {
       id: 1,
@@ -13,7 +13,7 @@ const Trending=()=> {
       channel: "T-Series",
       views: "16M views",
       timeAgo: "49 minutes ago",
-      thumbnail: "/placeholder.svg?height=180&width=320&text=Action+Scene",
+      thumbnail: "https://i.ibb.co/VpwMpGgz/medium.jpg",
       alt: "Action scene",
     },
     {
@@ -22,7 +22,7 @@ const Trending=()=> {
       channel: "T-Series",
       views: "16M views",
       timeAgo: "49 minutes ago",
-      thumbnail: "/placeholder.svg?height=180&width=320&text=Red+Background",
+      thumbnail: "https://i.ibb.co/zTWrWzkz/large.jpg",
       alt: "People with red background",
     },
     {
@@ -31,7 +31,7 @@ const Trending=()=> {
       channel: "T-Series",
       views: "16M views",
       timeAgo: "49 minutes ago",
-      thumbnail: "/placeholder.svg?height=180&width=320&text=Profile+Portrait",
+      thumbnail: "https://i.ibb.co/VWHjYx4L/small.jpg",
       alt: "Profile portrait",
     },
     {
@@ -142,8 +142,8 @@ const Trending=()=> {
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center gap-2">
-            <Play className="h-6 w-6 text-purple-600 fill-purple-600" />
-            <h2 className="text-xl font-bold">Top Trending Videos</h2>
+           <Tv/>
+            <h2 className="text-xl font-bold">Top Trending TV series</h2>
           </div>
           <a href="#" className="text-sm px-4 py-1.5 rounded-full border border-white/20 hover:bg-white/10 transition">
             View All
@@ -178,7 +178,7 @@ const Trending=()=> {
                       <img
                         src={video.thumbnail || "/placeholder.svg"}
                         alt={video.alt}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain"
                         draggable={false}
                       />
                     </div>
@@ -213,4 +213,4 @@ const Trending=()=> {
     </div>
   )
 }
-export default Trending
+export default TrendingSeries
