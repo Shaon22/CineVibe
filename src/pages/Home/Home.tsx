@@ -5,6 +5,7 @@ import TrendingMovies from "./TrendingMovies";
 import TrendingSeries from "./TrendingSeries";
 import Blogs from "./Blogs";
 import Footer from "../../components/Footer";
+import Live from "./Live";
 
 const Home = () => {
   return <div className=" min-h-screen home ">
@@ -20,6 +21,7 @@ const Home = () => {
                 <TrendingMovies></TrendingMovies>
                 <TrendingSeries></TrendingSeries>
                 <Blogs></Blogs>
+                <Live></Live>
                 <Footer></Footer>
               </div>
             

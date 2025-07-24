@@ -2,34 +2,66 @@
 
 import type React from "react"
 
-import { useState, useEffect, useRef, useCallback } from "react"
-import {Clapperboard } from "lucide-react"
+import { useState, useRef, useCallback } from "react"
+import {Radio } from "lucide-react"
 
-const TrendingMovies=()=> {
-  interface Movie {
-  _id: string;
-  title: string;
-  channel: string;
-  views: string;
-  timeAgo: string;
-  thumbnail: string;
-}
- const [movies, setMovies] = useState<Movie[]>([]);
-
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const res = await fetch("http://localhost:5000/allMovies");
-        const data = await res.json();
-        // Take only 5 movies
-        setMovies(data.slice(0, 5));
-      } catch (err) {
-        console.error("Failed to fetch movies:", err);
-      }
-    };
-    fetchMovies();
-  }, []);
-  //           
+const Live=()=> {
+            const videos = [
+    {
+      id: 1,
+      title: "What is Lorem Ipsum?",
+      channel: "T-Series",
+      views: "16M views",
+      timeAgo: "49 minutes ago",
+      thumbnail: "https://i.ibb.co/VpwMpGgz/medium.jpg",
+      alt: "Action scene",
+    },
+    {
+      id: 2,
+      title: "What is Lorem Ipsum?",
+      channel: "T-Series",
+      views: "16M views",
+      timeAgo: "49 minutes ago",
+      thumbnail: "https://i.ibb.co/zTWrWzkz/large.jpg",
+      alt: "People with red background",
+    },
+    {
+      id: 3,
+      title: "What is Lorem Ipsum?",
+      channel: "T-Series",
+      views: "16M views",
+      timeAgo: "49 minutes ago",
+      thumbnail: "https://i.ibb.co/VWHjYx4L/small.jpg",
+      alt: "Profile portrait",
+    },
+    {
+      id: 4,
+      title: "What is Lorem Ipsum?",
+      channel: "T-Series",
+      views: "16M views",
+      timeAgo: "49 minutes ago",
+      thumbnail: "/placeholder.svg?height=180&width=320&text=Snacks+Scene",
+      alt: "Person with snacks",
+    },
+    {
+      id: 5,
+      title: "What is Lorem Ipsum?",
+      channel: "T-Series",
+      views: "14M views",
+      timeAgo: "1 hour ago",
+      thumbnail: "/placeholder.svg?height=180&width=320&text=Music+Video",
+      alt: "Music video",
+    },
+    {
+      id: 6,
+      title: "What is Lorem Ipsum?",
+      channel: "T-Series",
+      views: "12M views",
+      timeAgo: "2 hours ago",
+      thumbnail: "/placeholder.svg?height=180&width=320&text=Comedy+Scene",
+      alt: "Comedy scene",
+    },
+  ]
 
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
@@ -39,7 +71,7 @@ const TrendingMovies=()=> {
 
   const sliderRef = useRef<HTMLDivElement>(null)
   const itemsPerView = 4
-  const maxIndex = Math.max(0, movies.length - itemsPerView)
+  const maxIndex = Math.max(0, videos.length - itemsPerView)
 
   const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {
@@ -104,16 +136,14 @@ const TrendingMovies=()=> {
       return baseTransform + dragPercent
     }
     return baseTransform
-    
   }
-  
   return (
-    <div className="w-full shadow-2xl  text-white px-4 py-6">
+    <div className="w-full  text-white px-4 py-6">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center gap-2">
-           <Clapperboard/>
-            <h2 className="text-xl font-bold">Top Trending Movies</h2>
+           <Radio/>
+            <h2 className="text-xl font-bold">Live Shows</h2>
           </div>
           <a href="#" className="text-sm px-4 py-1.5 rounded-full border border-white/20 hover:bg-white/10 transition">
             View All
@@ -137,27 +167,27 @@ const TrendingMovies=()=> {
                 userSelect: "none",
               }}
             >
-              {movies.map((movie) => (
+              {videos.map((video) => (
                 <div
-                  key={movie._id}
+                  key={video.id}
                   className="min-w-[25%] px-2"
                   style={{ pointerEvents: isDragging ? "none" : "auto" }}
                 >
                   <div className="video-card">
                     <div className="relative aspect-video rounded-lg overflow-hidden mb-2">
                       <img
-                        src={movie.thumbnail || "/placeholder.svg"}
-                  
+                        src={video.thumbnail || "/placeholder.svg"}
+                        alt={video.alt}
                         className="w-full h-full object-contain"
                         draggable={false}
                       />
                     </div>
-                    <div className="text-xs text-gray-400 mb-1">{movie.channel}</div>
-                    <h3 className="font-medium mb-1 line-clamp-1">{movie.title}</h3>
+                    <div className="text-xs text-gray-400 mb-1">{video.channel}</div>
+                    <h3 className="font-medium mb-1 line-clamp-1">{video.title}</h3>
                     <div className="flex items-center text-xs text-gray-400">
-                      <span>{movie.views}</span>
+                      <span>{video.views}</span>
                       <span className="mx-2">•</span>
-                      <span>{movie.timeAgo}</span>
+                      <span>{video.timeAgo}</span>
                     </div>
                   </div>
                 </div>
@@ -183,4 +213,4 @@ const TrendingMovies=()=> {
     </div>
   )
 }
-export default TrendingMovies
+export default Live
