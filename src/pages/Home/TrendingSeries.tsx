@@ -2,66 +2,33 @@
 
 import type React from "react"
 
-import { useState, useRef, useCallback } from "react"
+import { useState, useRef, useCallback, useEffect } from "react"
 import {Tv } from "lucide-react"
 
 const TrendingSeries=()=> {
-            const videos = [
-    {
-      id: 1,
-      title: "What is Lorem Ipsum?",
-      channel: "T-Series",
-      views: "16M views",
-      timeAgo: "49 minutes ago",
-      thumbnail: "https://i.ibb.co/VpwMpGgz/medium.jpg",
-      alt: "Action scene",
-    },
-    {
-      id: 2,
-      title: "What is Lorem Ipsum?",
-      channel: "T-Series",
-      views: "16M views",
-      timeAgo: "49 minutes ago",
-      thumbnail: "https://i.ibb.co/zTWrWzkz/large.jpg",
-      alt: "People with red background",
-    },
-    {
-      id: 3,
-      title: "What is Lorem Ipsum?",
-      channel: "T-Series",
-      views: "16M views",
-      timeAgo: "49 minutes ago",
-      thumbnail: "https://i.ibb.co/VWHjYx4L/small.jpg",
-      alt: "Profile portrait",
-    },
-    {
-      id: 4,
-      title: "What is Lorem Ipsum?",
-      channel: "T-Series",
-      views: "16M views",
-      timeAgo: "49 minutes ago",
-      thumbnail: "/placeholder.svg?height=180&width=320&text=Snacks+Scene",
-      alt: "Person with snacks",
-    },
-    {
-      id: 5,
-      title: "What is Lorem Ipsum?",
-      channel: "T-Series",
-      views: "14M views",
-      timeAgo: "1 hour ago",
-      thumbnail: "/placeholder.svg?height=180&width=320&text=Music+Video",
-      alt: "Music video",
-    },
-    {
-      id: 6,
-      title: "What is Lorem Ipsum?",
-      channel: "T-Series",
-      views: "12M views",
-      timeAgo: "2 hours ago",
-      thumbnail: "/placeholder.svg?height=180&width=320&text=Comedy+Scene",
-      alt: "Comedy scene",
-    },
-  ]
+        interface series {
+          _id: string;
+          title: string;
+          channel: string;
+          views: string;
+          timeAgo: string;
+          thumbnail: string;
+        }
+         const [series, setSeries] = useState<series[]>([]);
+        
+          useEffect(() => {
+            const fetchMovies = async () => {
+              try {
+                const res = await fetch("http://localhost:5000/allSeries");
+                const data = await res.json();
+                // Take only 5 movies
+                setSeries(data.slice(0, 5));
+              } catch (err) {
+                console.error("Failed to fetch movies:", err);
+              }
+            };
+            fetchMovies();
+          }, []);    
 
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
@@ -71,7 +38,7 @@ const TrendingSeries=()=> {
 
   const sliderRef = useRef<HTMLDivElement>(null)
   const itemsPerView = 4
-  const maxIndex = Math.max(0, videos.length - itemsPerView)
+  const maxIndex = Math.max(0, series.length - itemsPerView)
 
   const handleMouseDown = useCallback(
     (e: React.MouseEvent) => {
@@ -167,9 +134,9 @@ const TrendingSeries=()=> {
                 userSelect: "none",
               }}
             >
-              {videos.map((video) => (
+              {series.map((video) => (
                 <div
-                  key={video.id}
+                  key={video._id}
                   className="min-w-[25%] px-2"
                   style={{ pointerEvents: isDragging ? "none" : "auto" }}
                 >
@@ -177,7 +144,7 @@ const TrendingSeries=()=> {
                     <div className="relative aspect-video rounded-lg overflow-hidden mb-2">
                       <img
                         src={video.thumbnail || "/placeholder.svg"}
-                        alt={video.alt}
+                       
                         className="w-full h-full object-contain"
                         draggable={false}
                       />

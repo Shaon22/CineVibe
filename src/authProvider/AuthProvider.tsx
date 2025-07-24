@@ -1,65 +1,92 @@
-import { createContext, useEffect } from "react";
-import { useState } from "react";
-import {GoogleAuthProvider,createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile} from "firebase/auth"
-import auth from "../Firebase/Firebase.config";
-export const MyContext=createContext(null)
-const googleProvider = new GoogleAuthProvider()
-const AuthProvider = ({children}) => {
-    const [user,setUser]=useState([])
-    const [loading,setLoading]=useState(true)
+import React, { createContext, useEffect, useState, ReactNode } from "react";
+import {
+  GoogleAuthProvider,
+  User,
+  UserCredential,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  updateProfile,
+} from "firebase/auth";
+import auth from "../firebase/firebase.config";
 
-    const createUser=(email,password)=>{
-        setLoading(false)
-        return createUserWithEmailAndPassword(auth,email,password)
-    }
+// 👉 Define what the context will hold
+interface AuthContextType {
+  user: User | null;
+  loading: boolean;
+  createUser: (email: string, password: string) => Promise<UserCredential>;
+  signIn: (email: string, password: string) => Promise<UserCredential>;
+  googleLogin: () => Promise<UserCredential>;
+  logOut: () => Promise<void>;
+  updateUserProfile: (name: string, photo: string) => Promise<void>;
+}
 
-    const signIn=(email,password)=>{
-        setLoading(false)
-        return signInWithEmailAndPassword(auth,email,password,)
-    }
+// 👉 Create context with default `null` (we’ll handle it via Provider)
+export const MyContext = createContext<AuthContextType | null>(null);
 
-    const googleLogin=()=>{
-        setLoading(false)
-        return signInWithPopup(auth,googleProvider)
-    }
+const googleProvider = new GoogleAuthProvider();
 
-    const logOut=()=>{
-        setLoading(true)
-        return signOut(auth)
-    }
-    const updateUserProfile=(name,photo)=>{
-        return updateProfile(auth.currentUser,{
-            displayName:name,
-            photoURL:photo
-        })
-    }
-    
+// 👉 Props for the Provider
+interface AuthProviderProps {
+  children: ReactNode;
+}
 
-    useEffect(()=>{
-        const unsubscribe=onAuthStateChanged(auth,currentUser=>{
-            setUser(currentUser)
-            setLoading(false)
-            return
-        })
-        return ()=>{
-           unsubscribe() 
-        } 
-    },[])
+const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  // user can be null or a firebase User
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
-    const authInfo={
-        createUser,
-        signIn,
-        googleLogin,
-        logOut,
-        updateUserProfile,
-        loading,
-        user
+  const createUser = (email: string, password: string) => {
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  const signIn = (email: string, password: string) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const googleLogin = () => {
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
+
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
+
+  const updateUserProfile = (name: string, photo: string) => {
+    if (auth.currentUser) {
+      return updateProfile(auth.currentUser, {
+        displayName: name,
+        photoURL: photo,
+      });
     }
-    return (
-       <MyContext.Provider value={authInfo}>
-        {children}
-       </MyContext.Provider>
-    );
+    return Promise.reject("No user is currently signed in");
+  };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const authInfo: AuthContextType = {
+    createUser,
+    signIn,
+    googleLogin,
+    logOut,
+    updateUserProfile,
+    loading,
+    user,
+  };
+
+  return <MyContext.Provider value={authInfo}>{children}</MyContext.Provider>;
 };
 
 export default AuthProvider;
