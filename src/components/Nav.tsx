@@ -2,6 +2,7 @@ import { useTypewriter } from "react-simple-typewriter";
 import { FaSearch } from "react-icons/fa";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   const user: boolean = false;
@@ -46,9 +47,11 @@ const Nav = () => {
         </>
       ) : (
         <Box sx={{ "& button": { m: 1 } }}>
+          <Link to={"/login"}>
           <Button  variant="contained" size="medium">
             login
           </Button>
+          </Link>
         </Box>
       )}
     </div>
