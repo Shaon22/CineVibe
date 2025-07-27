@@ -1,4 +1,11 @@
-import { Clapperboard, Home, ChevronRight, Tv, FileSpreadsheet, Radio } from "lucide-react";
+import {
+  Clapperboard,
+  Home,
+  ChevronRight,
+  Tv,
+  FileSpreadsheet,
+  Radio,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Sidenav = () => {
@@ -18,41 +25,55 @@ const Sidenav = () => {
       </div>
 
       <div className="flex flex-col gap-5 p-5">
-        <div className={commonClasses}>
-          <div className={commonClasses2}>
-            <Home />
-            <Link to={"u"}>Home</Link>
+        <Link to={"/"}>
+          <div className={commonClasses}>
+            <div className={commonClasses2}>
+              <Home />
+              <h1>Home</h1>
+            </div>
+            <ChevronRight />
           </div>
-          <ChevronRight />
-        </div>
-         <div className={commonClasses}>
-          <div className={commonClasses2}>
-            <Clapperboard />
-            <Link to={"u"}>Movies</Link>
+        </Link>
+
+        <Link to={"/allMovies"}>
+          <div className={commonClasses}>
+            <div className={commonClasses2}>
+              <Clapperboard />
+              <h1>Movies</h1>
+            </div>
+            <ChevronRight />
           </div>
-          <ChevronRight />
-        </div>
-         <div className={commonClasses}>
-          <div className={commonClasses2}>
-            <Tv />
-            <Link to={"u"}>TV Series</Link>
+        </Link>
+
+        <Link to={"/allSeries"}>
+          <div className={commonClasses}>
+            <div className={commonClasses2}>
+              <Tv />
+              <h1>TV Series</h1>
+            </div>
+            <ChevronRight />
           </div>
-          <ChevronRight />
-        </div>
-        <div className={commonClasses}>
-          <div className={commonClasses2}>
-            <FileSpreadsheet />
-            <Link to={"u"}>Blogs</Link>
+        </Link>
+
+        <Link to={"/allBlogs"}>
+          <div className={commonClasses}>
+            <div className={commonClasses2}>
+              <FileSpreadsheet />
+              <h1>Blogs</h1>
+            </div>
+            <ChevronRight />
           </div>
-          <ChevronRight />
-        </div>
-         <div className={commonClasses}>
-          <div className={commonClasses2}>
-            <Radio/>
-            <Link to={"u"}>Live Shows</Link>
+        </Link>
+
+        <Link to={""}>
+          <div className={commonClasses}>
+            <div className={commonClasses2}>
+              <Radio />
+              <h1>Live Shows</h1>
+            </div>
+            <ChevronRight />
           </div>
-          <ChevronRight />
-        </div>
+        </Link>
       </div>
     </div>
   );
