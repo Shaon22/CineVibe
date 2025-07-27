@@ -38,7 +38,7 @@ const Live = () => {
       channel: "T-Series",
       views: "16M views",
       timeAgo: "49 minutes ago",
-      thumbnail: "/placeholder.svg?height=400&width=320&text=Snacks+Scene",
+      thumbnail: "https://i.ibb.co/VWHjYx4L/small.jpg",
       alt: "Person with snacks",
     },
     {
@@ -47,7 +47,7 @@ const Live = () => {
       channel: "T-Series",
       views: "14M views",
       timeAgo: "1 hour ago",
-      thumbnail: "/placeholder.svg?height=400&width=320&text=Music+Video",
+      thumbnail: "https://i.ibb.co/VWHjYx4L/small.jpg",
       alt: "Music video",
     },
     {
@@ -56,7 +56,7 @@ const Live = () => {
       channel: "T-Series",
       views: "12M views",
       timeAgo: "2 hours ago",
-      thumbnail: "/placeholder.svg?height=400&width=320&text=Comedy+Scene",
+      thumbnail: "https://i.ibb.co/VWHjYx4L/small.jpg",
       alt: "Comedy scene",
     },
   ]

@@ -1,5 +1,7 @@
+"use client"
 import { useState, useEffect } from "react"
 import { Clapperboard } from "lucide-react"
+import { Link } from "react-router-dom"
 
 const AllMovies = () => {
   interface Movie {
@@ -35,15 +37,14 @@ const AllMovies = () => {
         const data = await res.json()
 
         if (data && Array.isArray(data)) {
-          setMovies(data.slice(0, 5))
+          setMovies(data)
         } else {
           throw new Error("Invalid data format received")
         }
       } catch (err) {
         console.error("Failed to fetch movies:", err)
         setError(err instanceof Error ? err.message : "Failed to fetch movies")
-        // Use mock data as fallback
-        setMovies(movies)
+        setMovies([])
       } finally {
         setLoading(false)
       }
@@ -59,7 +60,7 @@ const AllMovies = () => {
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center gap-2">
               <Clapperboard />
-              <h2 className="text-xl font-bold">Top Trending Movies</h2>
+              <h2 className="text-xl font-bold">All Movies</h2>
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -78,17 +79,17 @@ const AllMovies = () => {
   }
 
   return (
-    <div className="w-full home min-h-screen shadow-2xl text-white px-4 py-6">
+    <div className="home w-full shadow-2xl text-white px-4 py-6">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-2 mb-6">
           <Clapperboard />
-          <h2 className="text-xl font-bold">Top Trending Movies</h2>
+          <h2 className="text-xl font-bold">All Movies</h2>
         </div>
 
         {error && (
           <div className="bg-yellow-900/50 border border-yellow-600 text-yellow-200 px-4 py-3 rounded mb-4">
             <p className="text-sm">
-              <strong>Note:</strong> Using sample data. API Error: {error}
+              <strong>Note:</strong> API Error: {error}
             </p>
           </div>
         )}
@@ -96,7 +97,9 @@ const AllMovies = () => {
         {/* Grid Container */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {movies.map((movie) => (
-            <div key={movie._id} className="video-card group cursor-pointer">
+            <Link key={movie._id}
+            to={`/moviesDetails/${movie._id}`}>
+            <div  className="video-card group cursor-pointer">
               <div className="relative aspect-video rounded-lg overflow-hidden mb-2 group-hover:scale-105 transition-transform duration-200">
                 <img
                   src={movie.thumbnail || "/placeholder.svg?height=200&width=300&text=Movie"}
@@ -114,6 +117,8 @@ const AllMovies = () => {
                 <span>{movie.timeAgo}</span>
               </div>
             </div>
+            </Link>
+            
           ))}
         </div>
       </div>

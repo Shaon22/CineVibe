@@ -25,7 +25,6 @@ interface AuthContextType {
 
 // 👉 Create context with default `null` (we’ll handle it via Provider)
 export const MyContext = createContext<AuthContextType | null>(null);
-
 const googleProvider = new GoogleAuthProvider();
 
 // 👉 Props for the Provider

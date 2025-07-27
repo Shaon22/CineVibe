@@ -1,56 +1,56 @@
-import { useState, useEffect } from "react"
-import { Clapperboard } from "lucide-react"
+import { useState, useEffect } from "react";
+import { Clapperboard } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const AllSeries = () => {
-  interface series {
-    _id: string
-    title: string
-    channel: string
-    views: string
-    timeAgo: string
-    thumbnail: string
+  interface Series {
+    _id: string;
+    title: string;
+    channel: string;
+    views: string;
+    timeAgo: string;
+    thumbnail: string;
   }
 
-  const [series, setSeries] = useState<series[]>([]);
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [series, setSeries] = useState<Series[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchSeries = async () => {
       try {
-        setLoading(true)
-        setError(null)
+        setLoading(true);
+        setError(null);
 
         const res = await fetch("http://localhost:5000/allSeries", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
-        })
+        });
 
         if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`)
+          throw new Error(`HTTP error! status: ${res.status}`);
         }
 
-        const data = await res.json()
+        const data = await res.json();
 
         if (data && Array.isArray(data)) {
-         setSeries(data.slice(0, 5))
+          setSeries(data);
         } else {
-          throw new Error("Invalid data format received")
+          throw new Error("Invalid data format received");
         }
       } catch (err) {
-        console.error("Failed to fetch movies:", err)
-        setError(err instanceof Error ? err.message : "Failed to fetch movies")
-        // Use mock data as fallback
-        setSeries(series)
+        console.error("Failed to fetch series:", err);
+        setError(err instanceof Error ? err.message : "Failed to fetch series");
+        setSeries([]);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchMovies()
-  }, [])
+    fetchSeries();
+  }, []);
 
   if (loading) {
     return (
@@ -59,7 +59,7 @@ const AllSeries = () => {
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center gap-2">
               <Clapperboard />
-              <h2 className="text-xl font-bold">Top Trending Movies</h2>
+              <h2 className="text-xl font-bold">All Series</h2>
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -74,7 +74,7 @@ const AllSeries = () => {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -82,7 +82,7 @@ const AllSeries = () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-2 mb-6">
           <Clapperboard />
-          <h2 className="text-xl font-bold">Top Trending Movies</h2>
+          <h2 className="text-xl font-bold">All Series</h2>
         </div>
 
         {error && (
@@ -96,10 +96,17 @@ const AllSeries = () => {
         {/* Grid Container */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {series.map((video) => (
-            <div key={video._id} className="video-card group cursor-pointer">
+            <Link
+              key={video._id}
+              to={`/seriesDetails/${video._id}`}
+              className="video-card group cursor-pointer block"
+            >
               <div className="relative aspect-video rounded-lg overflow-hidden mb-2 group-hover:scale-105 transition-transform duration-200">
                 <img
-                  src={video.thumbnail || "/placeholder.svg?height=200&width=300&text=Movie"}
+                  src={
+                    video.thumbnail ||
+                    "/placeholder.svg?height=200&width=300&text=Movie"
+                  }
                   alt={video.title}
                   className="w-full h-full object-cover"
                 />
@@ -113,12 +120,12 @@ const AllSeries = () => {
                 <span className="mx-2">•</span>
                 <span>{video.timeAgo}</span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AllSeries
+export default AllSeries;

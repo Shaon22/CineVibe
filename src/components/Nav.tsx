@@ -3,9 +3,18 @@ import { FaSearch } from "react-icons/fa";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { MyContext } from "../authProvider/AuthProvider";
+import { Bookmark} from "lucide-react";
 
 const Nav = () => {
-  const user: boolean = false;
+  const { user, logOut } = useContext(MyContext);
+   const handleLogOut = () => {
+    logOut()
+    .then((result) => {
+      console.log(result);
+    });
+  };
   const handleclick = () => {
     console.log("clicked");
   };
@@ -33,24 +42,42 @@ const Nav = () => {
       {user ? (
         <>
           <div className="flex items-center gap-5 mr-5">
+            <button className="mr-10">
+                <Bookmark className="text-white" />
+
+            </button>
             <h1 className=" text-white hidden sm:block uppercase font-bold">
-              {/* {user.displayName} */} shaon
+              {user.displayName}
             </h1>
             <div className="">
               <img
                 className="cursor-pointer h-6 w-6 sm:h-8 sm:w-8 rounded-full bg-white"
                 // onClick={toggleDropdown}
-                // src={user.photoURL}
+                src={user.photoURL}
               />
             </div>
+            <Box sx={{ "& button": { m: 1 } }}>
+              
+                <Button
+                onClick={(handleLogOut)}
+                  style={{
+                    fontWeight: "bold",
+                  }}
+                  variant="contained"
+                  size="medium"
+                  color="error"
+                >
+                  Logout
+                </Button>
+            </Box>
           </div>
         </>
       ) : (
         <Box sx={{ "& button": { m: 1 } }}>
           <Link to={"/login"}>
-          <Button  variant="contained" size="medium">
-            login
-          </Button>
+            <Button variant="contained" size="medium">
+              login
+            </Button>
           </Link>
         </Box>
       )}

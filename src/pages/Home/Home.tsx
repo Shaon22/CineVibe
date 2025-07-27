@@ -4,11 +4,12 @@ import Sidenav from "../../components/Sidenav";
 import TrendingMovies from "./TrendingMovies";
 import TrendingSeries from "./TrendingSeries";
 import Blogs from "./Blogs";
-import Footer from "../../components/Footer";
 import Live from "./Live";
+import Footer from "../../components/Footer";
 
 const Home = () => {
   return <div className=" min-h-screen home ">
+    
             <div className="flex">
               
               <div className="w-[20%] shadow-2xl min-h-screen  fixed">

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { Clapperboard } from "lucide-react"
+import { Link } from "react-router-dom";
 
 const Allblogs= () => {
  interface blog {
@@ -12,11 +13,11 @@ const Allblogs= () => {
     thumbnail: string;
   }
 
-  const [blogs, setSeries] = useState<blog[]>([]);
+  const [blogs, setBlogs] = useState<blog[]>([]);
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
+   useEffect(() => {
     const fetchMovies = async () => {
       try {
         setLoading(true)
@@ -36,19 +37,19 @@ const Allblogs= () => {
         const data = await res.json()
 
         if (data && Array.isArray(data)) {
-         setSeries(data.slice(0, 5))
+          setBlogs(data)
         } else {
           throw new Error("Invalid data format received")
         }
       } catch (err) {
         console.error("Failed to fetch movies:", err)
         setError(err instanceof Error ? err.message : "Failed to fetch movies")
-        // Use mock data as fallback
-        setSeries(blogs)
+        setBlogs([])
       } finally {
         setLoading(false)
       }
     }
+
 
     fetchMovies()
   }, [])
@@ -60,7 +61,7 @@ const Allblogs= () => {
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center gap-2">
               <Clapperboard />
-              <h2 className="text-xl font-bold">Top Trending Movies</h2>
+              <h2 className="text-xl font-bold">ALL Blogs</h2>
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -83,7 +84,7 @@ const Allblogs= () => {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-2 mb-6">
           <Clapperboard />
-          <h2 className="text-xl font-bold">Top Trending Movies</h2>
+          <h2 className="text-xl font-bold">All blogs</h2>
         </div>
 
         {error && (
@@ -97,6 +98,7 @@ const Allblogs= () => {
         {/* Grid Container */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {blogs.map((blog) => (
+            <Link to={`/blogsDetails/${blog._id}`}>
             <div key={blog._id} className="video-card group cursor-pointer">
               <div className="relative aspect-video rounded-lg overflow-hidden mb-2 group-hover:scale-105 transition-transform duration-200">
                 <img
@@ -115,6 +117,8 @@ const Allblogs= () => {
                 <span>{blog.timeAgo}</span>
               </div>
             </div>
+            </Link>
+            
           ))}
         </div>
       </div>
