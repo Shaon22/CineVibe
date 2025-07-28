@@ -40,7 +40,11 @@ export const router = createBrowserRouter([
     path:"/allBlogs",
     element:<AllBlogs></AllBlogs>
   },
-  {
+  
+  ]
+  
+},
+{
     path:"/blogsDetails/:_id",
     element:<BlogDetails></BlogDetails>,
     loader:({params})=>fetch(`http://localhost:5000/allBlogs/${params._id}`)
@@ -55,8 +59,5 @@ export const router = createBrowserRouter([
     element:<SeriesDetails></SeriesDetails>,
     loader:({params})=>fetch(`http://localhost:5000/allSeries/${params._id}`)
   },
-  ]
-  
-},
   
 ]);
