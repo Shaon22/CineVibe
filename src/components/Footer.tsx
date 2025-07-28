@@ -17,10 +17,10 @@ export default function Footer() {
         <div className="container mx-auto max-w-6xl">
           {/* Logo Section */}
           <div className="flex justify-center mb-8">
-            <div className="flex items-center space-x-3">
-              <div className="flex items-center justify-center w-12 h-12 bg-white rounded-lg">
-                <Clapperboard className="w-6 h-6 text-purple-600 fill-current" />
-              </div>
+            <div className="flex items-center gap-2">
+             
+                <Clapperboard className="w-6 h-6 text-white" />
+        
               <h2 className="text-3xl font-bold text-white">CineVibe</h2>
             </div>
           </div>

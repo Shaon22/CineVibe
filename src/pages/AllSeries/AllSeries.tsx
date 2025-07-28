@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Clapperboard } from "lucide-react";
+import { Clapperboard, Tv } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const AllSeries = () => {
@@ -58,7 +58,7 @@ const AllSeries = () => {
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center gap-2">
-              <Clapperboard />
+              <Tv />
               <h2 className="text-xl font-bold">All Series</h2>
             </div>
           </div>
@@ -81,7 +81,7 @@ const AllSeries = () => {
     <div className="w-full home min-h-screen shadow-2xl text-white px-4 py-6">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-2 mb-6">
-          <Clapperboard />
+          <Tv />
           <h2 className="text-xl font-bold">All Series</h2>
         </div>
 

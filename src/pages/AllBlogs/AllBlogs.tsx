@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Clapperboard } from "lucide-react"
+import { Bookmark, Clapperboard, FileSpreadsheet, Sheet } from "lucide-react"
 import { Link } from "react-router-dom";
 
 const Allblogs= () => {
@@ -60,7 +60,7 @@ const Allblogs= () => {
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center gap-2">
-              <Clapperboard />
+              <FileSpreadsheet />
               <h2 className="text-xl font-bold">ALL Blogs</h2>
             </div>
           </div>
@@ -83,7 +83,7 @@ const Allblogs= () => {
     <div className="w-full home min-h-screen shadow-2xl text-white px-4 py-6">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-2 mb-6">
-          <Clapperboard />
+          <FileSpreadsheet />
           <h2 className="text-xl font-bold">All blogs</h2>
         </div>
 

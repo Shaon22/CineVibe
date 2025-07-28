@@ -1,6 +1,17 @@
-import { Clapperboard, Search } from "lucide-react";
+import {  Bookmark, Clapperboard, Search } from "lucide-react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { MyContext } from "../authProvider/AuthProvider";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 const Nav3 = () => {
+            const{logOut,user}=useContext(MyContext)
+const handleLogOut = () => {
+    logOut()
+    .then((result) => {
+      console.log(result);
+    });
+  };
   const navLinks = [
     { name: "Home", to: "/" },
     { name: "Movies", to: "/allMovies" },
@@ -9,11 +20,11 @@ const Nav3 = () => {
     { name: "Live", to: "#" },
   ];
   return (
-    <nav className="flex items-center justify-between p-4 border-b border-gray-200 bg-white shadow-sm">
+    <nav className="flex items-center justify-between p-4  shadow-2xl bg-[#243b55]">
       <Link to={"/"}>
-        <div className="flex items-center">
-          <Clapperboard className="text-purple-600"></Clapperboard>
-          <h1 className="text-xl font-bold">CineVibe</h1>
+        <div className="flex gap-2 items-center">
+          <Clapperboard className="text-white"></Clapperboard>
+          <h1 className="text-xl text-white font-bold">CineVibe</h1>
         </div>
       </Link>
       <div>
@@ -21,20 +32,62 @@ const Nav3 = () => {
           <Link
             to={link.to}
             key={link.name}
-            className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-lg font-medium transition-colors duration-200"
+            className="text-white  px-3 py-2 rounded-md text-lg font-medium transition-colors duration-200"
           >
             {link.name}
           </Link>
         ))}
       </div>
       <div className="relative flex items-center">
-        <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+        <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-white" />
         <input
-          type="search"
+          
           placeholder="Search..."
-          className="pl-8 pr-3 py-1.5 h-9 w-[150px] lg:w-[200px] rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
+          className="pl-8 pr-3 py-1.5 h-9 w-[150px] lg:w-[200px] rounded-md border text-white border-white text-sm"
         />
       </div>
+      {user ? (
+        <>
+          <div className="flex items-center gap-5 mr-5">
+            <button className="mr-10">
+                <Bookmark className="text-white" />
+
+            </button>
+            <h1 className=" text-white hidden sm:block uppercase font-bold">
+              {user.displayName}
+            </h1>
+            <div className="">
+              <img
+                className="cursor-pointer h-6 w-6 sm:h-8 sm:w-8 rounded-full bg-white"
+                // onClick={toggleDropdown}
+                src={user.photoURL}
+              />
+            </div>
+            <Box sx={{ "& button": { m: 1 } }}>
+              
+                <Button
+                onClick={(handleLogOut)}
+                  style={{
+                    fontWeight: "bold",
+                  }}
+                  variant="contained"
+                  size="medium"
+                  color="error"
+                >
+                  Logout
+                </Button>
+            </Box>
+          </div>
+        </>
+      ) : (
+        <Box sx={{ "& button": { m: 1 } }}>
+          <Link to={"/login"}>
+            <Button variant="contained" size="medium">
+              login
+            </Button>
+          </Link>
+        </Box>
+      )}
     </nav>
   );
 };
