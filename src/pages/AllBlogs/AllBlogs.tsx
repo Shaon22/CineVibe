@@ -23,7 +23,7 @@ const Allblogs= () => {
         setLoading(true)
         setError(null)
 
-        const res = await fetch("http://localhost:5000/allBlogs", {
+        const res = await fetch("https://cine-vibe-express-server.vercel.app/allBlogs", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

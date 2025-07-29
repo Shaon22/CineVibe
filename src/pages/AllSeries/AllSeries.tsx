@@ -22,7 +22,7 @@ const AllSeries = () => {
         setLoading(true);
         setError(null);
 
-        const res = await fetch("http://localhost:5000/allSeries", {
+        const res = await fetch("https://cine-vibe-express-server.vercel.app/allSeries", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
