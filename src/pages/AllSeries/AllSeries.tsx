@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Clapperboard, Tv } from "lucide-react";
+import {Tv } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const AllSeries = () => {

@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { FcGoogle, FcHome } from "react-icons/fc";
+import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -63,7 +63,7 @@ const Register: React.FC = () => {
             );
           });
       })
-      .catch((error: any) => {
+      .catch((error) => {
         console.error("Registration Error:", error);
         let errorMessage = "An unknown error occurred during registration. Please try again.";
 

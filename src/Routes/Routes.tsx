@@ -47,17 +47,17 @@ export const router = createBrowserRouter([
 {
     path:"/blogsDetails/:_id",
     element:<BlogDetails></BlogDetails>,
-    loader:({params})=>fetch(`http://localhost:5000/allBlogs/${params._id}`)
+    loader:({params})=>fetch(`https://cine-vibe-express-server.vercel.app/${params._id}`)
   },
   {
     path:"/moviesDetails/:_id",
     element:<MovieDetails></MovieDetails>,
-    loader:({params})=>fetch(`http://localhost:5000/allmovies/${params._id}`)
+    loader:({params})=>fetch(`https://cine-vibe-express-server.vercel.app/${params._id}`)
   },
   {
     path:"/seriesDetails/:_id",
     element:<SeriesDetails></SeriesDetails>,
-    loader:({params})=>fetch(`http://localhost:5000/allSeries/${params._id}`)
+    loader:({params})=>fetch(`https://cine-vibe-express-server.vercel.app/${params._id}`)
   },
   
 ]);

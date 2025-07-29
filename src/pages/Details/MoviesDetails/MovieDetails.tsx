@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Footer from "../../../components/Footer";
 import { Bookmark } from "lucide-react";
+import Nav3 from "../../../components/Nav3";
 
 const MovieDetails = () => {
   const moviesInfo = useLoaderData();
@@ -26,7 +27,7 @@ const MovieDetails = () => {
         setLoading(true);
         setError(null);
 
-        const res = await fetch("http://localhost:5000/allMovies", {
+        const res = await fetch("https://cine-vibe-express-server.vercel.app/allMovies", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -66,6 +67,7 @@ const MovieDetails = () => {
   }
   return (
     <div>
+      <Nav3></Nav3>
       <div className="home min-h-screen bg-white p-4 md:p-6 lg:p-8">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[2fr_1fr] xl:grid-cols-[3fr_1fr]">
           {/* Left Column: Video Player and Details */}

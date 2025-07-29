@@ -95,7 +95,7 @@ const TrendingSeries = () => {
     const fetchSeries = async () => {
       try {
         setLoading(true)
-        const res = await fetch("http://localhost:5000/allSeries")
+        const res = await fetch("https://cine-vibe-express-server.vercel.app/allSeries")
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
         const data = await res.json()
         if (Array.isArray(data)) {

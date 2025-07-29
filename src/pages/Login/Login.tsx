@@ -39,7 +39,7 @@ const Login: React.FC = () => {
         toast.success("Login Successful!");
         navigate((location.state as string) || "/");
       })
-      .catch((error: any) => {
+      .catch((error) => {
         console.error("Login Error:", error);
         let errorMessage = "An unknown error occurred. Please try again.";
 
@@ -67,7 +67,7 @@ const Login: React.FC = () => {
         toast.success("Google Login Successful!");
         navigate((location.state as string) || "/");
       })
-      .catch((error: any) => {
+      .catch((error) => {
         console.error("Google Login Error:", error);
         let errorMessage = "Google login failed. Please try again.";
         if (error.message) {
