@@ -12,9 +12,11 @@ const TrendingMovies = () => {
     timeAgo: string;
     thumbnail: string;
   }
+const [movies, setMovies] = useState<Movie[]>([]);
+const [loading, setLoading] = useState<boolean>(true);
 
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState(true);
+  // const [movies, setMovies] = useState<Movie[]>([]);
+  // const [loading, setLoading] = useState(true);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -98,27 +100,40 @@ const TrendingMovies = () => {
   };
 
   // Fetch movies
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch("https://cine-vibe-express-server.vercel.app/allMovies");
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        const data = await res.json();
-        if (Array.isArray(data)) {
-          setMovies(data.slice(0, 5));
-        } else {
-          console.error("Invalid data format");
-        }
-      } catch (err) {
-        console.error("Failed to fetch movies:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchMovies();
-  }, []);
-
+  // useEffect(() => {
+  //   const fetchMovies = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const res = await fetch("http://localhost:5000/allMovies");
+  //       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+  //       const data = await res.json();
+  //       if (Array.isArray(data)) {
+  //         setMovies(data.slice(0, 5));
+  //       } else {
+  //         console.error("Invalid data format");
+  //       }
+  //     } catch (err) {
+  //       console.error("Failed to fetch movies:", err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchMovies();
+  // }, []);
+ 
+ useEffect(() => {
+  fetch("https://cine-vibe-express-server.vercel.app/api/allMovies")
+    .then((res) => res.json())
+    .then((data: Movie[]) => {
+     
+      setMovies(data.slice(0,5));
+      setLoading(false);
+    })
+    .catch((error) => {
+      console.error("Error fetching movies:", error);
+      setLoading(false);
+    });
+}, []);
   // Loading
   if (loading) {
     return (

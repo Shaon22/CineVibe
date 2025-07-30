@@ -14,42 +14,54 @@ const AllSeries = () => {
 
   const [series, setSeries] = useState<Series[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+ 
+  // useEffect(() => {
+  //   const fetchSeries = async () => {
+  //     try {
+  //       setLoading(true);
+  //       setError(null);
 
+  //       const res = await fetch("http://localhost:5000/allSeries", {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       });
+
+  //       if (!res.ok) {
+  //         throw new Error(`HTTP error! status: ${res.status}`);
+  //       }
+
+  //       const data = await res.json();
+
+  //       if (data && Array.isArray(data)) {
+  //         setSeries(data);
+  //       } else {
+  //         throw new Error("Invalid data format received");
+  //       }
+  //     } catch (err) {
+  //       console.error("Failed to fetch series:", err);
+  //       setError(err instanceof Error ? err.message : "Failed to fetch series");
+  //       setSeries([]);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchSeries();
+  // }, []);
   useEffect(() => {
-    const fetchSeries = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        const res = await fetch("https://cine-vibe-express-server.vercel.app/allSeries", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-        }
-
-        const data = await res.json();
-
-        if (data && Array.isArray(data)) {
-          setSeries(data);
-        } else {
-          throw new Error("Invalid data format received");
-        }
-      } catch (err) {
-        console.error("Failed to fetch series:", err);
-        setError(err instanceof Error ? err.message : "Failed to fetch series");
-        setSeries([]);
-      } finally {
+    fetch("https://cine-vibe-express-server.vercel.app/api/allSeries")
+      .then((res) => res.json())
+      .then((data: Series[]) => {
+       
+        setSeries(data);
         setLoading(false);
-      }
-    };
-
-    fetchSeries();
+      })
+      .catch((error) => {
+        console.error("Error fetching movies:", error);
+        setLoading(false);
+      });
   }, []);
 
   if (loading) {
@@ -84,14 +96,6 @@ const AllSeries = () => {
           <Tv />
           <h2 className="text-xl font-bold">All Series</h2>
         </div>
-
-        {error && (
-          <div className="bg-yellow-900/50 border border-yellow-600 text-yellow-200 px-4 py-3 rounded mb-4">
-            <p className="text-sm">
-              <strong>Note:</strong> Using sample data. API Error: {error}
-            </p>
-          </div>
-        )}
 
         {/* Grid Container */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">

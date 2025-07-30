@@ -15,44 +15,56 @@ const Allblogs= () => {
 
   const [blogs, setBlogs] = useState<blog[]>([]);
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
 
-   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        setLoading(true)
-        setError(null)
+  //  useEffect(() => {
+  //   const fetchMovies = async () => {
+  //     try {
+  //       setLoading(true)
+  //       setError(null)
 
-        const res = await fetch("https://cine-vibe-express-server.vercel.app/allBlogs", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
+  //       const res = await fetch("http://localhost:5000/allBlogs", {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       })
 
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`)
-        }
+  //       if (!res.ok) {
+  //         throw new Error(`HTTP error! status: ${res.status}`)
+  //       }
 
-        const data = await res.json()
+  //       const data = await res.json()
 
-        if (data && Array.isArray(data)) {
-          setBlogs(data)
-        } else {
-          throw new Error("Invalid data format received")
-        }
-      } catch (err) {
-        console.error("Failed to fetch movies:", err)
-        setError(err instanceof Error ? err.message : "Failed to fetch movies")
-        setBlogs([])
-      } finally {
-        setLoading(false)
-      }
-    }
+  //       if (data && Array.isArray(data)) {
+  //         setBlogs(data)
+  //       } else {
+  //         throw new Error("Invalid data format received")
+  //       }
+  //     } catch (err) {
+  //       console.error("Failed to fetch movies:", err)
+  //       setError(err instanceof Error ? err.message : "Failed to fetch movies")
+  //       setBlogs([])
+  //     } finally {
+  //       setLoading(false)
+  //     }
+  //   }
 
 
-    fetchMovies()
-  }, [])
+  //   fetchMovies()
+  // }, [])
+  useEffect(() => {
+    fetch("https://cine-vibe-express-server.vercel.app/api/allBlogs")
+      .then((res) => res.json())
+      .then((data: blog[]) => {
+       
+        setBlogs(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching movies:", error);
+        setLoading(false);
+      });
+  }, []);
 
   if (loading) {
     return (
@@ -86,14 +98,6 @@ const Allblogs= () => {
           <FileSpreadsheet />
           <h2 className="text-xl font-bold">All blogs</h2>
         </div>
-
-        {error && (
-          <div className="bg-yellow-900/50 border border-yellow-600 text-yellow-200 px-4 py-3 rounded mb-4">
-            <p className="text-sm">
-              <strong>Note:</strong> Using sample data. API Error: {error}
-            </p>
-          </div>
-        )}
 
         {/* Grid Container */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">

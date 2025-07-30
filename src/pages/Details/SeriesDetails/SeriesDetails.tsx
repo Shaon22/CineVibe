@@ -3,6 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import Footer from "../../../components/Footer";
 import { Bookmark } from "lucide-react";
 import Nav3 from "../../../components/Nav3";
+import { Link } from "react-router-dom";
 
 const SeriesDetails = () => {
   const seriesInfo = useLoaderData();
@@ -19,43 +20,56 @@ const SeriesDetails = () => {
 
   const [series, setSeries] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  
 
+  // useEffect(() => {
+  //   const fetchMovies = async () => {
+  //     try {
+  //       setLoading(true);
+  //       setError(null);
+
+  //       const res = await fetch("https://cine-vibe-express-server.vercel.app/allSeries", {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       });
+
+  //       if (!res.ok) {
+  //         throw new Error(`HTTP error! status: ${res.status}`);
+  //         console.log(error);
+  //       }
+
+  //       const data = await res.json();
+
+  //       if (data && Array.isArray(data)) {
+  //         setSeries(data);
+  //       } else {
+  //         throw new Error("Invalid data format received");
+  //       }
+  //     } catch (err) {
+  //       console.error("Failed to fetch movies:", err);
+  //       setError(err instanceof Error ? err.message : "Failed to fetch movies");
+  //       setSeries([]);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchMovies();
+  // }, []);
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        const res = await fetch("https://cine-vibe-express-server.vercel.app/allSeries", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
-          console.log(error);
-        }
-
-        const data = await res.json();
-
-        if (data && Array.isArray(data)) {
-          setSeries(data);
-        } else {
-          throw new Error("Invalid data format received");
-        }
-      } catch (err) {
-        console.error("Failed to fetch movies:", err);
-        setError(err instanceof Error ? err.message : "Failed to fetch movies");
-        setSeries([]);
-      } finally {
+    fetch("https://cine-vibe-express-server.vercel.app/api/allSeries")
+      .then((res) => res.json())
+      .then((data: Movie[]) => {
+       
+        setSeries(data);
         setLoading(false);
-      }
-    };
-
-    fetchMovies();
+      })
+      .catch((error) => {
+        console.error("Error fetching series:", error);
+        setLoading(false);
+      });
   }, []);
 
   if (loading) {
@@ -103,9 +117,9 @@ const SeriesDetails = () => {
             <h2 className="text-xl font-bold text-white">Suggested Series</h2>
             <div className="grid gap-4">
               {series.map((video) => (
-                <a
+                <Link
                   key={video._id}
-                  href={`/seriesDetails/${video._id}`}
+                  to={`/seriesDetails/${video._id}`}
                   className="block"
                 >
                   <div className="flex items-center gap-4 p-2 rounded-md border border-gray-500 hover:bg-gray-700 hover:text-gray-500  transition-colors">
@@ -124,7 +138,7 @@ const SeriesDetails = () => {
                       <p className="text-xs ">{video.views}</p>
                     </div>
                   </div>
-                </a>
+                </Link>
               ))}
             </div>
           </div>

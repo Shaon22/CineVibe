@@ -91,28 +91,41 @@ const TrendingSeries = () => {
     return baseTransform
   }
 
-  useEffect(() => {
-    const fetchSeries = async () => {
-      try {
-        setLoading(true)
-        const res = await fetch("https://cine-vibe-express-server.vercel.app/allSeries")
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
-        const data = await res.json()
-        if (Array.isArray(data)) {
-          setSeries(data.slice(0, 5))
-        } else {
-          console.error("Invalid data format")
-        }
-      } catch (err) {
-        console.error("Failed to fetch series:", err)
-        setSeries([])
-      } finally {
-        setLoading(false)
-      }
-    }
+  // useEffect(() => {
+  //   const fetchSeries = async () => {
+  //     try {
+  //       setLoading(true)
+  //       const res = await fetch("http://localhost:5000/allSeries")
+  //       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
+  //       const data = await res.json()
+  //       if (Array.isArray(data)) {
+  //         setSeries(data.slice(0, 5))
+  //       } else {
+  //         console.error("Invalid data format")
+  //       }
+  //     } catch (err) {
+  //       console.error("Failed to fetch series:", err)
+  //       setSeries([])
+  //     } finally {
+  //       setLoading(false)
+  //     }
+  //   }
 
-    fetchSeries()
-  }, [])
+  //   fetchSeries()
+  // }, [])
+  useEffect(() => {
+    fetch("https://cine-vibe-express-server.vercel.app/api/allSeries")
+      .then((res) => res.json())
+      .then((data: Series[]) => {
+       
+        setSeries(data.slice(0,5));
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching movies:", error);
+        setLoading(false);
+      });
+  }, []);
 
   // ✅ Return while loading
   if (loading) {

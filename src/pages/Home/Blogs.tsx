@@ -20,21 +20,33 @@ const Blogs = () => {
   const [loading, setLoading] = useState(true);
 
   // fetch blogs
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const res = await fetch("https://cine-vibe-express-server.vercel.app/allBlogs");
-        const data = await res.json();
-        setBlogs(data.slice(0, 5));
-      } catch (err) {
-        console.error("Failed to fetch blogs:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchBlogs();
-  }, []);
-
+  // useEffect(() => {
+  //   const fetchBlogs = async () => {
+  //     try {
+  //       const res = await fetch("http://localhost:5000/allBlogs");
+  //       const data = await res.json();
+  //       setBlogs(data.slice(0, 5));
+  //     } catch (err) {
+  //       console.error("Failed to fetch blogs:", err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchBlogs();
+  // }, []);
+useEffect(() => {
+  fetch("https://cine-vibe-express-server.vercel.app/api/allBlogs")
+    .then((res) => res.json())
+    .then((data: Blog[]) => {
+     
+      setBlogs(data.slice(0,5));
+      setLoading(false);
+    })
+    .catch((error) => {
+      console.error("Error fetching movies:", error);
+      setLoading(false);
+    });
+}, []);
   // slider states
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
