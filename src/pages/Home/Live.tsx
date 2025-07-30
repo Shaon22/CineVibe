@@ -11,7 +11,7 @@ const Live = () => {
       channel: "T-Series",
       views: "16M views",
       timeAgo: "49 minutes ago",
-      thumbnail: "https://i.ibb.co/9mn3wrq7/thumb26.jpg",
+      thumbnail: "https://i.ibb.co/WvG0LxvG/thumb20.jpg",
       alt: "Action scene",
     },
     {
@@ -20,7 +20,7 @@ const Live = () => {
       channel: "T-Series",
       views: "16M views",
       timeAgo: "49 minutes ago",
-      thumbnail: "https://i.ibb.co/9mn3wrq7/thumb26.jpg",
+      thumbnail: "https://i.ibb.co/20ZNr8Dy/thumb13.jpg",
       alt: "People with red background",
     },
     {
@@ -29,7 +29,7 @@ const Live = () => {
       channel: "T-Series",
       views: "16M views",
       timeAgo: "49 minutes ago",
-      thumbnail: "https://i.ibb.co/9mn3wrq7/thumb26.jpg",
+      thumbnail: "https://i.ibb.co/WvG0LxvG/thumb20.jpg",
       alt: "Profile portrait",
     },
     {
@@ -38,7 +38,7 @@ const Live = () => {
       channel: "T-Series",
       views: "16M views",
       timeAgo: "49 minutes ago",
-      thumbnail: "https://i.ibb.co/9mn3wrq7/thumb26.jpg",
+      thumbnail: "https://i.ibb.co/20ZNr8Dy/thumb13.jpg",
       alt: "Person with snacks",
     },
     {
@@ -47,7 +47,7 @@ const Live = () => {
       channel: "T-Series",
       views: "14M views",
       timeAgo: "1 hour ago",
-      thumbnail: "https://i.ibb.co/9mn3wrq7/thumb26.jpg",
+      thumbnail: "https://i.ibb.co/WvG0LxvG/thumb20.jpg",
       alt: "Music video",
     },
     {
@@ -56,7 +56,7 @@ const Live = () => {
       channel: "T-Series",
       views: "12M views",
       timeAgo: "2 hours ago",
-      thumbnail: "https://i.ibb.co/9mn3wrq7/thumb26.jpg",
+      thumbnail: "https://i.ibb.co/20ZNr8Dy/thumb13.jpg",
       alt: "Comedy scene",
     },
   ]

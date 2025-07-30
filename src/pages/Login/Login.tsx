@@ -157,7 +157,7 @@ const Login: React.FC = () => {
           </button>
           <h1 className="text-white m-5 text-center">
             Dont Have any account?{" "}
-            <Link to={"/register"} className="text-blue-500 text-lg font-bold">
+            <Link to={"/register"} className="text-cyan-500 text-lg font-bold">
               Register
             </Link>
           </h1>

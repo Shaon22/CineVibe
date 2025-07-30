@@ -4,32 +4,34 @@ import { useState, useEffect } from "react"
 import { Play, ChevronUp, ChevronDown } from "lucide-react"
 
 // Carousel slide data
-const slides = [
+const slides = 
+ [
   {
     id: 1,
-    title: "Discover The Latest From TicsTube",
+    title: "Explore the World of Movies & Series on CineVibe",
     description:
-      "ScreenPal's intuitive tools help you capture, create, and share videos and images for authentic and effective visual communication.",
+      "From cinematic masterpieces to binge-worthy series, CineVibe brings all your favorite entertainment under one roof.",
   },
   {
     id: 2,
-    title: "Create Engaging Content Easily",
+    title: "Stay Updated With the Latest Releases",
     description:
-      "Our powerful editing suite gives you everything you need to produce professional-quality videos in minutes.",
+      "Catch trailers, reviews, and news about the hottest movies and series trending across the globe—updated daily.",
   },
   {
     id: 3,
-    title: "Share Your Vision With The World",
+    title: "Personalized for Every Viewer",
     description:
-      "Instantly publish your videos to TicsTube and reach your audience across all platforms with one click.",
+      "Build your custom watchlist, track your progress across series, and get recommendations tailored to your mood and preferences.",
   },
   {
     id: 4,
-    title: "Analytics That Drive Growth",
+    title: "A Community Built for Story Lovers",
     description:
-      "Understand your audience with comprehensive analytics and insights to optimize your content strategy.",
+      "Whether you're into fast-paced thrillers or slow-burn dramas, join discussions and share your thoughts with fellow fans.",
   },
 ]
+
 
 
 const Nav=()=> {
