@@ -7,27 +7,25 @@ import Blogs from "./Blogs"
 import Footer from "../../components/Footer"
 import Live from "./Live"
 
-
 const Home = () => {
   return (
-    <div className="min-h-screen home">
-      <div className="flex flex-col md:flex-row">
-        {" "}
-        {/* Stacks vertically on small screens, horizontally on medium and up */}
-        {/* Sidenav container: hidden on small screens, fixed 300px width on medium and up */}
-        <div className="w-full shadow-2xl min-h-screen fixed hidden md:block">
-          <Sidenav />
-        </div>
-        {/* Main content area: full width on small screens, pushed by sidebar on medium and up */}
-        <div className="w-full  flex-1">
-          <Nav />
-          <BanknoteArrowDown />
+    <div className="min-h-screen flex bg-black text-white">
+      {/* Sidebar */}
+      <div className="hidden md:block md:w-64 fixed top-0 left-0 h-full bg-[#1e1e1e] z-50">
+        <Sidenav />
+      </div>
+
+      {/* Main Content */}
+      <div className="w-full md:ml-64 flex flex-col">
+        <Nav />
+        <div className="px-4 md:px-8">
+          <BanknoteArrowDown className="my-4" />
           <TrendingMovies />
           <TrendingSeries />
           <Blogs />
           <Live />
-          <Footer />
         </div>
+        <Footer />
       </div>
     </div>
   )
