@@ -209,7 +209,7 @@ const TrendingMovies = () => {
             onMouseLeave={handleMouseLeave}
           >
             <div
-              className={`flex ${isDragging ? "" : "transition-transform duration-300 ease-out"}`}
+              className={`flex ${isDragging ?  "" : "transition-transform duration-300 ease-out"}`}
               style={{
                 transform: `translateX(${getTransform()}%)`,
                 userSelect: "none",
@@ -219,7 +219,7 @@ const TrendingMovies = () => {
                 <div
                   key={movie._id}
                   // Apply responsive min-width classes for different screen sizes
-                  className="min-w-full sm:min-w-1/2 md:min-w-1/3 lg:min-w-1/4 px-2"
+                  className="min-w-full  grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 px-2"
                 >
                   {/* Entire card is clickable */}
                   <Link
