@@ -19,7 +19,7 @@ const Home = () => {
           <Sidenav />
         </div>
         {/* Main content area: full width on small screens, pushed by sidebar on medium and up */}
-        <div className="w-full md:ml-[300px] flex-1">
+        <div className="w-full md:ml-[500px] flex-1">
           <Nav />
           <BanknoteArrowDown />
           <TrendingMovies />
