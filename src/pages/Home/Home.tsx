@@ -17,8 +17,9 @@ const Home = () => {
 
       {/* Main Content */}
       <div className="w-full md:ml-64 flex flex-col">
-        <Nav />
-        <div className="px-4 md:px-8">
+       
+        <div className="px-4">
+           <Nav />
           <BanknoteArrowDown className="my-4" />
           <TrendingMovies />
           <TrendingSeries />
