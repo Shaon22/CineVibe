@@ -1,36 +1,34 @@
-import { BanknoteArrowDown } from "lucide-react"
-import Sidenav from "../../components/Sidenav"
-import Nav from "./Banner"
-import TrendingMovies from "./TrendingMovies"
-import TrendingSeries from "./TrendingSeries"
-import Blogs from "./Blogs"
-import Footer from "../../components/Footer"
-import Live from "./Live"
-
+import { BanknoteArrowDown } from "lucide-react";
+import Sidenav from "../../components/Sidenav";
+import Nav from "./Banner";
+import TrendingMovies from "./TrendingMovies";
+import TrendingSeries from "./TrendingSeries";
+import Blogs from "./Blogs";
+import Footer from "../../components/Footer";
+import Live from "./Live";
 
 const Home = () => {
   return (
-    <div className="min-h-screen home">
-      <div className="flex flex-col md:flex-row">
-        {" "}
-        {/* Stacks vertically on small screens, horizontally on medium and up */}
-        {/* Sidenav container: hidden on small screens, fixed 300px width on medium and up */}
-        <div className="w-full md:w-[200px] shadow-2xl min-h-screen fixed hidden md:block">
-          <Sidenav />
-        </div>
-        {/* Main content area: full width on small screens, pushed by sidebar on medium and up */}
-        <div className="w-full md:ml-[400px] flex-1">
-          <Nav />
-          <BanknoteArrowDown />
-          <TrendingMovies />
-          <TrendingSeries />
-          <Blogs />
-          <Live />
-          <Footer />
-        </div>
-      </div>
-    </div>
-  )
-}
+    <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
+      {/* Sidebar */}
+      <aside className="w-full md:w-auto md:min-w-[180px] lg:min-w-[220px] xl:min-w-[250px] shadow-md bg-white">
+        <Sidenav />
+      </aside>
 
-export default Home
+      {/* Main Content */}
+      <main className="flex-1 p-4 space-y-8">
+        <Nav />
+        <div className="flex justify-center">
+          <BanknoteArrowDown size={32} className="text-primary" />
+        </div>
+        <TrendingMovies />
+        <TrendingSeries />
+        <Blogs />
+        <Live />
+        <Footer />
+      </main>
+    </div>
+  );
+};
+
+export default Home;
