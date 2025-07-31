@@ -15,11 +15,11 @@ const Home = () => {
         {" "}
         {/* Stacks vertically on small screens, horizontally on medium and up */}
         {/* Sidenav container: hidden on small screens, fixed 300px width on medium and up */}
-        <div className="w-full md:w-[200px] shadow-2xl min-h-screen fixed hidden md:block">
+        <div className="w-full shadow-2xl min-h-screen fixed hidden md:block">
           <Sidenav />
         </div>
         {/* Main content area: full width on small screens, pushed by sidebar on medium and up */}
-        <div className="w-full md:ml-[400px] flex-1">
+        <div className="w-full  flex-1">
           <Nav />
           <BanknoteArrowDown />
           <TrendingMovies />
